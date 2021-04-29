@@ -16,7 +16,7 @@ struct Elem
     int info;
 };
 
-void Create(Elem*& first, Elem*& last, int value)
+void Create(Elem*& first, Elem*& last, int value,int size)
 {
     Elem* tmp = new Elem;
     tmp->info = value;
@@ -29,6 +29,10 @@ void Create(Elem*& first, Elem*& last, int value)
 
     if (first == NULL)
         first = tmp;
+    if (value < size)
+        Create(first, last, value + 1, size);
+    else
+        return;
 }
 
 void Print(Elem* first)
@@ -65,8 +69,7 @@ int main()
     Elem* first = NULL,
         * last = NULL;
 
-    for (int i = 1; i <= 10; i++)
-        Create(first, last, i);
+    Create(first, last, 1,10);
 
     cout << endl;
     Print(first);
